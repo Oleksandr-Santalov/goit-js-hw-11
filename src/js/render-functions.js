@@ -1,39 +1,23 @@
-import SimpleLightbox from 'simplelightbox';
-
-const form = document.querySelector('.form');
-const gallery = document.querySelector('.gallery');
-const userInput = document.querySelector('input');
-const div = document.querySelector('.div');
-
-export const formEl = {
-  form,
-  gallery,
-  userInput,
-  div,
-};
-
-export const showLoader = () => {
-  const loader = document.createElement('span');
-  loader.classList.add('loader');
-  formEl.div.append(loader);
-};
-
-export const hideLoader = () => {
-  const loader = document.querySelector('.loader');
-  if (loader) {
-    loader.remove();
-  }
-};
-
-export function lightbox() {
-  const lightbox = new SimpleLightbox('.gallery a', options);
-  lightbox.refresh();
+export function render(images) {
+  const markup = images
+    .map(
+      image => `
+            <li class="images-list-item">
+                <a class="item-link" href="${image.largeImageURL}">
+                    <img 
+                        class="item-image" 
+                        src="${image.webformatURL}" 
+                        alt="${image.tags}" 
+                        />
+                    <div class="item-image-info">
+                        <p class="info-title">Likes <span class="info-data">${image.likes}</span></p>
+                        <p class="info-title">Views <span class="info-data">${image.views}</span></p>
+                        <p class="info-title">Comments <span class="info-data">${image.comments}</span></p>
+                        <p class="info-title">Downloads <span class="info-data">${image.downloads}</span></p>
+                    </div>
+                </a>
+            </li>`
+    )
+    .join('');
+  return markup;
 }
-const options = {
-  captions: true,
-  captionSelector: 'img',
-  captionType: 'attr',
-  captionsData: 'alt',
-  captionPosition: 'bottom',
-  captionDelay: 250,
-};
