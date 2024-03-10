@@ -5,11 +5,12 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const imagesList = document.querySelector('.images-list');
-const searchButton = document.querySelector('.search-button');
+const searchForm = document.querySelector('.search-form'); 
 const searchBar = document.querySelector('.search-settings');
 const loading = document.querySelector('.loading-text');
 
-searchButton.addEventListener('click', search);
+
+searchForm.addEventListener('submit', search);
 
 function search(event) {
   event.preventDefault();
